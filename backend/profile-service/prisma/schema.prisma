@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Profile {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  email     String   @unique
+  fullName  String
+  bio       String?
+  skills    String?  // Stored as JSON string or comma-separated
+  role      String   @default("candidate") // candidate, recruiter
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
